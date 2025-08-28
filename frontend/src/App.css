@@ -1,0 +1,44 @@
+.react-youtube iframe {
+  width: 100%;
+
+  @media only screen and (min-width: 768px) {
+    height: 600px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    height: 500px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    height: 400px;
+  }
+
+  @media only screen and (max-width: 450px) {
+    height: 300px;
+  }
+}
+
+table th,
+table td {
+  padding: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
