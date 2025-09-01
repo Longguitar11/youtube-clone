@@ -1,13 +1,7 @@
 import express from 'express';
 import { protectRoutes } from '../middlewares/protectRoutes.js';
 import {
-    commentTopLevel,
-    createPost,
-    deletePost,
-    editChannelProfile,
-    editComment,
-    editPost,
-    getChannelById, getChannelsByIds, getDislikedCommentIds, getDislikedVideoIds, getFeaturedChannelVideos, getHistory,
+    commentTopLevel, createPost, deletePost, editChannelProfile, editComment, editPost, getChannelById, getChannelsByIds, getDislikedCommentIds, getDislikedVideoIds, getFeaturedChannelVideos, getHistory,
     getLikedCommentIds, getLikedVideoIds, getMyLikedVideos, getMyPosts, getRelevantVideos, getRepliedComments, getReportedVideos, getReportReasons, getSubscriptionIds, getSubscriptions,
     getVideoById, getVideoComments, getVideos, getVideosfromChannel, ratingComment, ratingVideo, replyComment, reportVideo, searchVideos,
     subscribeChannel

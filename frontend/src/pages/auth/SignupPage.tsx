@@ -39,6 +39,7 @@ const SignupPage = () => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
     defaultValues: {
       email: '',
       password: '',
@@ -62,12 +63,13 @@ const SignupPage = () => {
   }
 
   return (
-    <div className='h-screen flex items-center justify-center'>
-      <div className='w-96 space-y-4'>
+    <div className='h-screen flex items-center justify-center bg-white'>
+            <div className='rounded space-y-4 shadow-md p-4 min-w-md'>
+
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className='space-y-8 rounded shadow p-4'
+            className='space-y-4'
           >
             <p className='text-2xl text-blue-500 font-bold text-center'>
               SIGN UP
@@ -80,7 +82,7 @@ const SignupPage = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder='Enter your email' {...field} />
+                    <Input placeholder='Enter your email' className='rounded-full' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -96,6 +98,7 @@ const SignupPage = () => {
                   <FormControl>
                     <Input
                       type='password'
+                      className='rounded-full'
                       placeholder='Enter your password'
                       {...field}
                     />
@@ -114,6 +117,7 @@ const SignupPage = () => {
                   <FormControl>
                     <Input
                       type='password'
+                      className='rounded-full'
                       placeholder='Enter your confirm password'
                       {...field}
                     />
@@ -125,23 +129,21 @@ const SignupPage = () => {
 
             <Button
               type='submit'
-              className='w-full bg-blue-500 hover:opacity-80'
+              className='w-full rounded-full bg-blue-500 hover:opacity-80'
             >
               Submit
             </Button>
           </form>
         </Form>
 
-        <a href='http://localhost:5000/api/auth/google'>
-          <div className='flex gap-2 items-center justify-center p-2 border border-primary rounded cursor-pointer hover:opacity-80 transition-opacity duration-200 w-full'>
-            <FaGoogle className='text-2xl text-primary' />
-            <button className='text-shadow-primary-foreground cursor-pointer'>
-              Sign in with Google
-            </button>
-          </div>
-        </a>
+        <Link
+          to='http://localhost:5000/api/auth/google'
+          className='flex gap-2 items-center font-medium justify-center p-2 text-sm border text-blue-500 border-blue-500 hover:text-white hover:bg-blue-500 rounded-full cursor-pointer hover:opacity-80 transition-opacity duration-200 w-full'
+        >
+          <FaGoogle className='text-xl' /> Sign in with Google
+        </Link>
 
-        <div className='flex gap-2 items-center justify-center mt-4'>
+        <div className='text-sm flex gap-2 items-center justify-center mt-4'>
           <p>You already have an account?</p>
           <Link to='/login' className='text-blue-500'>
             Login

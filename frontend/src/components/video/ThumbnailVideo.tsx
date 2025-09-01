@@ -19,7 +19,7 @@ const ThumbnailVideo = ({ video, className }: ThumbnailVideoProps) => {
       publishedAt,
       title,
       thumbnails: {
-        maxres: { url } = { url: '/banner-placeholder.png' }
+        maxres: { url } = { url: '/thumb-placeholder.png' }
       }
     }
   } = video

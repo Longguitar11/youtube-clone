@@ -25,12 +25,13 @@ const formSchema = z.object({
 })
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const { setUser } = useAppContext();
- 
+  const { setUser } = useAppContext()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
     defaultValues: {
       email: '',
       password: ''
@@ -38,13 +39,13 @@ const LoginPage = () => {
   })
 
   async function onSubmit (values: z.infer<typeof formSchema>) {
-    console.log(values)
     const { email, password } = values
     const { message, user, error } = await login({ email, password })
 
     if (error) {
       toast.error(error)
     }
+    
     if (message && user) {
       setUser(user)
       navigate('/')
@@ -52,13 +53,10 @@ const LoginPage = () => {
   }
 
   return (
-    <div className='h-screen flex items-center justify-center'>
-      <div className='w-96 space-y-4'>
+    <div className='h-screen flex items-center justify-center bg-white'>
+      <div className='rounded space-y-4 shadow-md p-4 min-w-md'>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className='space-y-8 rounded shadow p-4'
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
             <p className='text-2xl text-blue-500 font-bold text-center'>
               SIGN IN
             </p>
@@ -70,7 +68,11 @@ const LoginPage = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder='Enter your email' {...field} />
+                    <Input
+                      placeholder='Enter your email'
+                      className='rounded-full'
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -85,6 +87,7 @@ const LoginPage = () => {
                   <FormControl>
                     <Input
                       type='password'
+                      className='rounded-full'
                       placeholder='Enter your password'
                       {...field}
                     />
@@ -95,23 +98,22 @@ const LoginPage = () => {
             />
             <Button
               type='submit'
-              className='w-full bg-blue-500 hover:opacity-80'
+              disabled={!form.formState.isValid}
+              className='w-full bg-blue-500 hover:opacity-80 rounded-full'
             >
               Submit
             </Button>
           </form>
         </Form>
 
-        <a href='http://localhost:5000/api/auth/google'>
-          <div className='flex gap-2 items-center justify-center p-2 border border-primary rounded cursor-pointer hover:opacity-80 transition-opacity duration-200 w-full'>
-            <FaGoogle className='text-2xl text-primary' />
-            <button className='text-shadow-primary-foreground cursor-pointer'>
-              Sign in with Google
-            </button>
-          </div>
-        </a>
+        <Link
+          to='http://localhost:5000/api/auth/google'
+          className='flex gap-2 items-center font-medium justify-center p-2 text-sm border text-blue-500 border-blue-500 hover:text-white hover:bg-blue-500 rounded-full cursor-pointer hover:opacity-80 transition-opacity duration-200 w-full'
+        >
+          <FaGoogle className='text-xl' /> Sign in with Google
+        </Link>
 
-        <div className='flex gap-2 items-center justify-center mt-4'>
+        <div className='flex text-sm gap-2 items-center justify-center mt-4'>
           <p>Don&apos;t have an account?</p>
           <Link to='/signup' className='text-blue-500'>
             Sign up

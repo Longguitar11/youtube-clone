@@ -23,9 +23,14 @@ export const protectRoutes = async (req, res, next) => {
             }
 
             const userData = (await user.get()).data();
-            const { password, ...otherData } = userData;
 
-            req.user = otherData;
+            if (!userData.isGoogleSignin) {
+                const { password, ...otherData } = userData;
+                req.user = otherData;
+            } else {
+                req.user = userData;
+            }
+
             next();
         } catch (error) {
             if (error.name === "TokenExpiredError") {

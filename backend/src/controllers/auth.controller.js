@@ -34,7 +34,7 @@ export const authenticateGoogle = async (req, res) => {
 
         const oauth2 = google.oauth2({ auth: oauth2Client, version: 'v2' });
         const { data } = await oauth2.userinfo.get();
-        const { email, name, id, picture } = data;
+        const { email, id } = data;
 
         let user = null;
         let userId = null;
@@ -48,10 +48,16 @@ export const authenticateGoogle = async (req, res) => {
         if (user.empty) {
             user = await db.collection("users").add({
                 email,
-                name,
                 googleId: id,
-                picture,
-                isGoogleSignin: true
+                isGoogleSignin: true,
+                channel: {
+                    channelId: userId,
+                    name: '',
+                    displayName: `@${email.split('@')[0]}`,
+                    description: '',
+                    profileUrl: '',
+                    bannerUrl: ''
+                }
             });
 
             userId = user.id;

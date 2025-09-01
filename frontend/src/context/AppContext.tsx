@@ -372,7 +372,7 @@ const ContextProvider = ({ children }: { children: React.ReactNode }) => {
     } else {
       fetchVideos() // FIRST FETCH VIDEO OR SEARCH TERM -> DELETE SEARCH TERM
     }
-  }, [searchTerm, fetchVideos, searchVideosByTerm])
+  }, [searchTerm])
 
   useEffect(() => {
     const nextPageToken = searchTerm

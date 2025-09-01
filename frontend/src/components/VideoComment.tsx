@@ -98,7 +98,6 @@ const VideoComment = ({
     }
 
     if (comments) {
-      console.log('set youtube comments')
       setCommentThreads(comments as CommentThreadInterface[])
     }
 
@@ -115,12 +114,9 @@ const VideoComment = ({
     }
 
     if (repliedOtherComments) {
-      console.log('repliedOtherComments', repliedOtherComments)
-
       setCommentThreads(prev =>
         prev.map(commentThread => {
           if (repliedOtherComments[commentThread.id]) {
-            console.log('replied', repliedOtherComments[commentThread.id])
             return {
               ...commentThread,
               snippet: {

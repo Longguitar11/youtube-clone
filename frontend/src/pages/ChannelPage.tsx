@@ -29,7 +29,7 @@ const ChannelPage = () => {
   useEffect(() => {
     if (!user?.isGoogleSignin && channelId === user?.channel.channelId) return
     fetchChannel(channelId!)
-  }, [channelId, user, fetchChannel])
+  }, [channelId, user])
 
   if (user?.channel.channelId === channelId)
     return <MyChannel />
