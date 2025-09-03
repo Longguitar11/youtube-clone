@@ -172,6 +172,9 @@ const ContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchChannel = useCallback(async (channelId: string) => {
     if (isChannelLoading) return
+
+    console.log('fetch channel')
+    
     setIsChannelLoading(true)
     const { error, channels: channel } = await getChannelById(channelId)
 

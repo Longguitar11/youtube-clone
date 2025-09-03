@@ -72,9 +72,10 @@ const WatchPage = () => {
 
   useEffect(() => {
     if (video?.snippet.channelId) {
+      console.log('fetch channel')
       fetchChannel(video?.snippet.channelId)
     }
-  }, [video?.snippet.channelId, fetchChannel])
+  }, [video?.snippet.channelId])
 
   if (!video) return null
 
