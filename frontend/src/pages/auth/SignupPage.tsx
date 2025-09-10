@@ -130,6 +130,7 @@ const SignupPage = () => {
 
             <Button
               type='submit'
+              disabled={!form.formState.isValid}
               className='w-full rounded-full bg-blue-500 hover:opacity-80'
             >
               Submit
