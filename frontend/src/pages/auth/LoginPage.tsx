@@ -16,6 +16,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { login } from '@/api/auth'
 import toast from 'react-hot-toast'
 import { useAppContext } from '@/context/useAppContext'
+import { API_BASE } from '@/constants/apiBase'
 
 const formSchema = z.object({
   email: z.email({ pattern: z.regexes.email }),
@@ -107,7 +108,7 @@ const LoginPage = () => {
         </Form>
 
         <Link
-          to={`https://youtube-clone-is1d.onrender.com/api/auth/google`}
+          to={`${API_BASE}/api/auth/google`}
           className='flex gap-2 items-center font-medium justify-center p-2 text-sm border text-blue-500 border-blue-500 hover:text-white hover:bg-blue-500 rounded-full cursor-pointer hover:opacity-80 transition-opacity duration-200 w-full'
         >
           <FaGoogle className='text-xl' /> Sign in with Google

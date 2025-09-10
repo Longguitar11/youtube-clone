@@ -18,7 +18,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/youtube", youtubeRoutes);
 
 if (NODE_ENV.trim() === "production") {
-	console.log(path.join(__dirname, "/frontend/dist"));
 	app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
 	app.get('*"other-routes"', (req, res) => {
