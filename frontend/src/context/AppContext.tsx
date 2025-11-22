@@ -370,14 +370,6 @@ const ContextProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   useEffect(() => {
-    if (searchTerm) {
-      searchVideosByTerm()
-    } else {
-      fetchVideos() // FIRST FETCH VIDEO OR SEARCH TERM -> DELETE SEARCH TERM
-    }
-  }, [searchTerm])
-
-  useEffect(() => {
     const nextPageToken = searchTerm
       ? videoList.search.nextPageToken
       : videoList.home.nextPageToken
@@ -429,6 +421,14 @@ const ContextProvider = ({ children }: { children: React.ReactNode }) => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (searchTerm) {
+      searchVideosByTerm()
+    } else {
+      fetchVideos() // FIRST FETCH VIDEO OR SEARCH TERM -> DELETE SEARCH TERM
+    }
+  }, [searchTerm])
 
   return (
     <AppContext.Provider

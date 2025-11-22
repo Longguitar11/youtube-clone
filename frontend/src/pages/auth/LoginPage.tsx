@@ -54,11 +54,10 @@ const LoginPage = () => {
   }
 
   return (
-    <div className='h-screen flex items-center justify-center bg-white'>
-      <div className='rounded space-y-4 shadow-md p-4 min-w-md'>
+      <div className='rounded space-y-4 sm:min-w-md'>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
-            <p className='text-2xl text-blue-500 font-bold text-center'>
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4 text-white'>
+            <p className='text-2xl font-bold text-center'>
               SIGN IN
             </p>
 
@@ -109,19 +108,18 @@ const LoginPage = () => {
 
         <a
           href={`${API_BASE}/api/auth/google`}
-          className='flex gap-2 items-center font-medium justify-center p-2 text-sm border text-blue-500 border-blue-500 hover:text-white hover:bg-blue-500 rounded-full cursor-pointer hover:opacity-80 transition-opacity duration-200 w-full'
+          className='flex gap-2 items-center font-medium justify-center p-2 text-sm border text-blue-500 border-blue-500 hover:text-white hover:bg-blue-500 rounded-full cursor-pointer transition-all duration-200 w-full'
         >
           <FaGoogle className='text-xl' /> Sign in with Google
         </a>
 
         <div className='flex text-sm gap-2 items-center justify-center mt-4'>
-          <p>Don&apos;t have an account?</p>
-          <Link to='/signup' className='text-blue-500'>
+          <p className='text-white'>Don&apos;t have an account?</p>
+          <Link to='/signup' className='text-blue-500 font-semibold hover:text-blue-400 transition-colors duration-200'>
             Sign up
           </Link>
         </div>
       </div>
-    </div>
   )
 }
 

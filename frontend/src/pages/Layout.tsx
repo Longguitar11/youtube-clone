@@ -21,11 +21,11 @@ const Layout = () => {
   }, [pathname])
 
   return (
-    <div className='bg-primary'>
+    <>
       {isUserLoading ? (
         <LoadingSpinner className='h-screen' />
       ) : user ? (
-        <>
+        <div className='bg-primary'>
           <Header setSidebarStatus={setSidebarStatus} />
           <Sidebar sidebarStatus={sidebarStatus} />
           <div
@@ -39,13 +39,20 @@ const Layout = () => {
             <Outlet />
             <ScrollToTopButton />
           </div>
-        </>
+        </div>
       ) : (
-        <Outlet />
+        <div className='relative min-h-screen bg-slate-900 flex items-center justify-center overflow-hidden'>
+          <div className='absolute w-[40rem] h-[40rem] bg-blue-500 rounded-full blur-[200px] top-[-10rem] left-[-10rem] opacity-30'></div>
+          <div className='absolute w-[40rem] h-[40rem] bg-red-500 rounded-full blur-[200px] bottom-[-10rem] right-[-10rem] opacity-30'></div>
+
+          <div className='relative z-10 bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-4 sm:p-8 max-sm:w-[calc(100%-2rem)]'>
+            <Outlet />
+          </div>
+        </div>
       )}
 
       <Toaster position='top-right' />
-    </div>
+    </>
   )
 }
 

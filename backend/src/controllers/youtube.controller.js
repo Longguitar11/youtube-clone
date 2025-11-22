@@ -840,7 +840,10 @@ export const subscribeChannel = async (req, res) => {
                 mine: true
             });
 
+            console.log('response:', response.data.items)
+
             if (response.data.items.length > 0) {
+                console.log('Unsubscribe channel')
                 await youtube.subscriptions.delete({
                     id: response.data.items[0].id
                 });
@@ -849,12 +852,17 @@ export const subscribeChannel = async (req, res) => {
             }
 
             else {
+                console.log('Subscribe channel')
                 await youtube.subscriptions.insert({
                     part: 'snippet',
-                    resourceId: {
-                        kind: 'youtube#channel',
-                        channelId
-                    },
+                    requestBody: {
+                        snippet: {
+                            resourceId: {
+                                kind: 'youtube#channel',
+                                channelId
+                            }
+                        }
+                    }
                 });
 
                 res.json({ message: 'Subscribed to channel successfully' });
