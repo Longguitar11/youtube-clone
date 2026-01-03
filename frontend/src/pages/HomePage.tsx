@@ -21,7 +21,7 @@ function chunkArray<T> (arr: T[], size: number): T[][] {
 
 const HomePage = () => {
   const navigate = useNavigate()
-  const { videos, isVideoLoading, observerTargetRef } = useAppContext()
+  const { videos, isVideoLoading, observerTargetRef, searchTerm, fetchVideos } = useAppContext()
 
   const [channelAvatars, setChannelAvatars] = useState<Record<string, string>>(
     {}
@@ -68,6 +68,13 @@ const HomePage = () => {
       fetchChannelAvatars()
     }
   }, [channelIds])
+
+  useEffect(() => {
+    if(!searchTerm && videos.length === 0) {
+      fetchVideos()
+    }
+  }, [])
+
 
   const renderedVideos = videos.map(video => {
     const {

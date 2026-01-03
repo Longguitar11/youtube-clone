@@ -36,7 +36,7 @@ const ReportHistory = () => {
 
   if(isLoading) return <LoadingSpinner />
 
-  const renderedReportedVideos = reportedVideos.map(reportedVideo => {
+  const renderedReportedVideos = reportedVideos.length > 0 ? reportedVideos.map(reportedVideo => {
     const {
       channelTitle,
       videoTitle,
@@ -70,7 +70,13 @@ const ReportHistory = () => {
         </td>
       </tr>
     )
-  })
+  }) : (
+    <tr>
+      <td colSpan={4} className='py-8 text-center text-gray-400'>
+        You have not reported any videos.
+      </td>
+    </tr>
+  )
 
   return (
     <div className='p-4'>

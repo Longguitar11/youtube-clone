@@ -50,6 +50,7 @@ interface AppContextInterface {
   subscribe: (channelId: string) => Promise<void>
   setUser: (user: UserInterface | null) => void
   setSearchTerm: Dispatch<SetStateAction<string>>
+  fetchVideos: () => Promise<void>
   fetchUser: () => Promise<void>
   fetchChannel: (channel: string) => Promise<void>
   ratingAVideo: (videoId: string, type: string) => Promise<void>
@@ -75,6 +76,7 @@ const AppContext = createContext<AppContextInterface>({
   setUser: () => {},
   setSearchTerm: () => {},
   subscribe: async () => {},
+  fetchVideos: async () => {},
   fetchUser: async () => {},
   fetchChannel: async () => {},
   ratingAVideo: async () => {},
@@ -454,6 +456,7 @@ const ContextProvider = ({ children }: { children: React.ReactNode }) => {
         subscribe,
         setSearchTerm,
         fetchUser: checkAuthentication,
+        fetchVideos,
         fetchChannel,
         ratingAVideo,
         ratingAComment
