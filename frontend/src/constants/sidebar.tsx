@@ -2,7 +2,7 @@ import React from 'react'
 import { AiOutlineHome } from 'react-icons/ai'
 import { BiLike } from 'react-icons/bi'
 import { GoHistory } from 'react-icons/go'
-import { MdOutlineSubscriptions } from 'react-icons/md'
+// import { MdOutlineSubscriptions } from 'react-icons/md'
 import { IoFlagOutline, IoMusicalNotesOutline } from 'react-icons/io5'
 import { MdNewspaper } from 'react-icons/md'
 import { SiYoutubegaming } from 'react-icons/si'
@@ -16,7 +16,7 @@ interface SidebarItem {
 
 interface SidebarSection {
   name?: string
-  items: SidebarItem[]
+  items?: SidebarItem[]
 }
 
 export const sidebarItems: SidebarSection[] = [
@@ -26,12 +26,15 @@ export const sidebarItems: SidebarSection[] = [
         name: 'Home',
         to: '/',
         icon: <AiOutlineHome className='text-2xl' />
-      },
-      {
-        name: 'Subscriptions',
-        to: '/subscriptions-videos',
-        icon: <MdOutlineSubscriptions className='text-2xl' />
-      },
+      }
+    ]
+  },
+  {
+    name: 'Subscriptions'
+  },
+  {
+    name: 'You',
+    items: [
       {
         name: 'History',
         to: '/history',

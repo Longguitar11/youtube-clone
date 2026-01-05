@@ -93,12 +93,12 @@ const Header = ({ setSidebarStatus }: SidebarProps) => {
             </DrawerTrigger>
             <DrawerContent className='bg-neutral-900 text-gray-100 !w-3xs border-none'>
               {sidebarItems.map((section, index) => (
-                <div key={index} className='border-b border-gray-400/30 py-2'>
+                <div key={index} className={cn('border-b border-gray-400/30 py-2', section.name && !section.items && 'hidden')}>
                   {section.name && (
                     <p className='font-medium ml-4 py-2'>{section.name}</p>
                   )}
 
-                  {section.items.map(item => (
+                  {section.items?.map(item => (
                     <DrawerClose asChild key={item.name}>
                       <Link
                         to={item.to}

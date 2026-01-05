@@ -129,7 +129,7 @@ export const getVideoById = async (req, res) => {
 
             // add videoId to myHistory
             if (!myHistoryRef.exists) {
-                await user.docs[0].ref.collection('myHistory').doc(videoId).set({});
+                await user.docs[0].ref.collection('myHistory').doc(videoId).set({watchedAt: new Date().toISOString()});
             }
 
             res.json(data.items[0]);
@@ -161,7 +161,7 @@ export const getHistory = async (req, res) => {
                 return res.status(400).json({ message: 'User not found' });
             }
 
-            const myHistory = await user.docs[0].ref.collection('myHistory').get();
+            const myHistory = await user.docs[0].ref.collection('myHistory').orderBy('watchedAt', 'desc').get();
             let historyData = myHistory.docs.map(doc => doc.id);
 
             historyData = [...historyData].join(',');

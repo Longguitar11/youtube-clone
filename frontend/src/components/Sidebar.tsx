@@ -31,7 +31,15 @@ const Sidebar = ({ sidebarStatus }: SidebarProps) => {
     }
 
     if (channels && (channels as ChannelInterface[]).length > 0) {
-      setSubscribedChannels(channels as ChannelInterface[])
+      const sortedChannels = (channels as ChannelInterface[]).sort((a, b) => {
+        return a.snippet.title.localeCompare(
+          b.snippet.title,
+          'en',
+          { sensitivity: 'base' } // ignore case & accents
+        )
+      })
+
+      setSubscribedChannels(sortedChannels)
     }
 
     setIsSubscribedChannelsLoading(false)
@@ -44,7 +52,7 @@ const Sidebar = ({ sidebarStatus }: SidebarProps) => {
   return (
     <div
       className={cn(
-        'fixed top-14 left-0 h-[calc(100vh-56px)] overflow-y-auto bg-black text-gray-100 space-y-2',
+        'fixed top-14 left-0 h-[calc(100vh-56px)] overflow-y-auto bg-black text-gray-100',
         sidebarStatus === 'large'
           ? 'w-3xs p-4'
           : sidebarStatus === 'small'
@@ -53,7 +61,16 @@ const Sidebar = ({ sidebarStatus }: SidebarProps) => {
       )}
     >
       {sidebarItems.map((section, index) => (
-        <div key={index} className='space-y-2 py-2 border-b border-gray-400/30'>
+        <div
+          key={index}
+          className={cn(
+            'space-y-2 py-2 border-b border-gray-400/30 last:border-0',
+            sidebarStatus === 'small' &&
+              section.name &&
+              !section.items &&
+              'hidden'
+          )}
+        >
           {section.name && (
             <p
               className={cn(
@@ -65,7 +82,44 @@ const Sidebar = ({ sidebarStatus }: SidebarProps) => {
             </p>
           )}
 
-          {section.items.map(item => (
+          {sidebarStatus === 'large' && section.name === 'Subscriptions' && (
+            <>
+              {isSubscribedChannelsLoading && (
+                <LoadingSpinner className='h-20' />
+              )}
+
+              {subscribedChannels?.length > 0 && (
+                <div
+                  className={cn(
+                    'space-y-2',
+                    subscribedChannels.length > 7 && 'h-[352px] overflow-y-auto'
+                  )}
+                >
+                  <div className=''>
+                    {subscribedChannels.map(channel => (
+                      <Link
+                        to={`/channel/${channel.id}`}
+                        key={channel.id}
+                        className='flex items-center gap-2 py-2 px-4 hover:bg-gray-800 transition-colors duration-200 cursor-pointer rounded-md'
+                      >
+                        <img
+                          src={channel.snippet.thumbnails.medium.url}
+                          alt={channel.snippet.title}
+                          className='w-7 h-7 rounded-full'
+                        />
+
+                        <span className='text-sm truncate'>
+                          {channel.snippet.title}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+
+          {section.items?.map(item => (
             <Link
               to={item.to}
               key={item.name}
@@ -93,34 +147,6 @@ const Sidebar = ({ sidebarStatus }: SidebarProps) => {
           ))}
         </div>
       ))}
-
-      {isSubscribedChannelsLoading && <LoadingSpinner className='h-20' />}
-
-      {sidebarStatus === 'large' && subscribedChannels?.length > 0 && (
-        <div className={cn('space-y-2 h-[440px] overflow-y-auto', )}>
-          <p className='text-lg font-medium ml-4'>Subscriptions</p>
-
-          <div className=''>
-            {subscribedChannels.map(channel => (
-              <Link
-                to={`/channel/${channel.id}`}
-                key={channel.id}
-                className='flex items-center gap-2 py-2 px-4 hover:bg-gray-800 transition-colors duration-200 cursor-pointer rounded-md'
-              >
-                <img
-                  src={channel.snippet.thumbnails.medium.url}
-                  alt={channel.snippet.title}
-                  className='w-7 h-7 rounded-full'
-                />
-
-                <span className='text-sm truncate'>
-                  {channel.snippet.title}
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
