@@ -30,21 +30,30 @@ import IconButton from './IconButton'
 import { cn } from '@/lib/utils'
 
 interface ShareButtonProps extends React.HTMLAttributes<HTMLDivElement> {
-  text?: string
   contentId: string
   type?: 'video' | 'channel'
+  text?: string
+  stopPropagation?: boolean
+  isHiddenTrigger?: boolean
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
   className?: string
   buttonClassName?: string
 }
 
 const ShareButton = ({
-  text,
   contentId,
   type = 'video',
+  text,
+  isHiddenTrigger = false,
+  open,
+  onOpenChange,
+  stopPropagation = false,
   className,
   buttonClassName,
   ...rest
 }: ShareButtonProps) => {
+
   const url =
     type === 'video'
       ? `https://www.youtube.com/watch?v=${contentId}`
@@ -60,12 +69,22 @@ const ShareButton = ({
   }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <IconButton {...rest} text={text || 'Share'} className={buttonClassName}>
-          <PiShareFatLight className='text-2xl' />
-        </IconButton>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTrigger asChild className={(cn(isHiddenTrigger && 'hidden'))}>
+        <div
+          onClick={e => stopPropagation && e.stopPropagation()}
+          className='w-full'
+        >
+          <IconButton
+            {...rest}
+            text={text || 'Share'}
+            className={buttonClassName}
+          >
+            <PiShareFatLight className='text-2xl' />
+          </IconButton>
+        </div>
       </DialogTrigger>
+
       <DialogContent
         onClick={e => e.stopPropagation()}
         className={cn(

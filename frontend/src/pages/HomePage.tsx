@@ -21,11 +21,13 @@ function chunkArray<T> (arr: T[], size: number): T[][] {
 
 const HomePage = () => {
   const navigate = useNavigate()
-  const { videos, isVideoLoading, observerTargetRef, searchTerm, fetchVideos } = useAppContext()
+  const { videos, isVideoLoading, observerTargetRef, searchTerm, fetchVideos } =
+    useAppContext()
 
   const [channelAvatars, setChannelAvatars] = useState<Record<string, string>>(
     {}
   )
+
   const fetchedChannelIds = useMemo(
     () => new Set(Object.keys(channelAvatars)),
     [channelAvatars]
@@ -70,11 +72,10 @@ const HomePage = () => {
   }, [channelIds])
 
   useEffect(() => {
-    if(!searchTerm && videos.length === 0) {
+    if (!searchTerm && videos.length === 0) {
       fetchVideos()
     }
   }, [])
-
 
   const renderedVideos = videos.map(video => {
     const {
@@ -86,7 +87,28 @@ const HomePage = () => {
     return (
       <div
         key={id}
-        onClick={() => navigate(`/watch/${id}`)}
+        onClickCapture={(e) => {
+          const dialogContent = document.querySelector(
+            '[data-slot="dialog-content"]'
+          )
+      
+          // Allow clicks INSIDE dialog
+          if (
+            dialogContent &&
+            dialogContent.contains(e.target as Node)
+          ) {
+            return
+          }
+      
+          // Block navigation if dialog exists
+          if (dialogContent) {
+            e.preventDefault()
+            e.stopPropagation()
+          }
+        }}
+        onClick={() => {
+          navigate(`/watch/${id}`)
+        }}
         className='cursor-pointer space-y-2'
       >
         <img
