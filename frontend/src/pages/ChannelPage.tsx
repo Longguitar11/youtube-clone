@@ -83,7 +83,7 @@ const ChannelPage = () => {
 
           <div className='hidden gap-2 items-center sm:flex'>
             <p className='text-clip whitespace-nowrap overflow-hidden text-neutral-400 w-72'>
-              {description}
+              {description || 'Tìm hiểu thêm về kênh này'}
             </p>
             <MoreButton channel={channel} />
           </div>

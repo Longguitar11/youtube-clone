@@ -108,7 +108,7 @@ const WatchPage = () => {
                     onClick={() => navigate(`/channel/${channelId}`)}
                   >
                     <img
-                      src={channel?.snippet.thumbnails.high.url || '/user.png'}
+                      src={channel?.snippet.thumbnails.high.url || './user.png'}
                       alt={channelTitle}
                       className='w-10 h-10 rounded-full'
                     />

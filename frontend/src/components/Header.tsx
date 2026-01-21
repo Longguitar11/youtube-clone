@@ -151,7 +151,7 @@ const Header = ({ setSidebarStatus }: SidebarProps) => {
         <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
           <DropdownMenuTrigger asChild>
             <img
-              src={profileUrl || '/user.png'}
+              src={profileUrl || './user.png'}
               alt='profile'
               className={cn(
                 'w-8 h-8 rounded-full cursor-pointer',
@@ -163,7 +163,7 @@ const Header = ({ setSidebarStatus }: SidebarProps) => {
           <DropdownMenuContent className='bg-green-950 text-white'>
             <div className='flex gap-4 p-4 border-b border-gray-200/20 bg-'>
               <img
-                src={profileUrl || '/user.png'}
+                src={profileUrl || './user.png'}
                 alt={name}
                 className='w-10 h-10 rounded-full'
               />

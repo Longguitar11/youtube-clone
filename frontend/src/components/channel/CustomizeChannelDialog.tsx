@@ -203,7 +203,7 @@ const CustomizeChannelDialog = ({
               <Label className=''>Profile image</Label>
               <div className='flex gap-4 items-center'>
                 <img
-                  src={previewImages.profileUrl || '/user.png'}
+                  src={previewImages.profileUrl || './user.png'}
                   alt={name}
                   className='size-24 object-cover rounded-full shrink-0'
                 />

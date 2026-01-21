@@ -109,7 +109,7 @@ const HomePage = () => {
         onClick={() => {
           navigate(`/watch/${id}`)
         }}
-        className='cursor-pointer space-y-2'
+        className='cursor-pointer space-y-2 hover:scale-103 transition-transform duration-200'
       >
         <img
           src={thumbnails.maxres?.url || thumbnails.medium?.url}
@@ -120,7 +120,7 @@ const HomePage = () => {
 
         <div className='flex gap-2'>
           <img
-            src={channelAvatars[channelId] || '/user.png'}
+            src={channelAvatars[channelId] || './user.png'}
             alt={title}
             loading='lazy'
             className='w-9 h-9 rounded-full shrink-0'

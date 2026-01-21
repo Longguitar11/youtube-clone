@@ -137,7 +137,7 @@ const CommentItem = ({
   return (
     <div className={cn('flex gap-4', className)}>
       <img
-        src={authorProfileImageUrl || '/user.png'}
+        src={authorProfileImageUrl || './user.png'}
         alt={authorDisplayName}
         loading='lazy'
         className={cn('rounded-full', type === 'normal' ? 'size-10' : 'size-6')}

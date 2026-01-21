@@ -131,7 +131,7 @@ const Posts = () => {
       <div className='rounded-xl border border-neutral-400/30 bg-neutral-800 p-4 text-white space-y-2'>
         <div className='flex gap-4 items-center'>
           <img
-            src={user?.channel.profileUrl || '/user.png'}
+            src={user?.channel.profileUrl || './user.png'}
             alt={user?.channel.name}
             className='size-10 rounded-full'
           />
