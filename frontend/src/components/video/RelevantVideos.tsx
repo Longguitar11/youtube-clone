@@ -110,7 +110,7 @@ const RelevantVideos = ({
     return (
       <div
         key={id}
-        className='flex flex-col lg:flex-row gap-3 cursor-pointer w-full'
+        className='flex flex-col xl:flex-row gap-3 cursor-pointer w-full'
         onClick={() => {
           navigate(`/watch/${id}`)
         }}
@@ -118,7 +118,7 @@ const RelevantVideos = ({
         <img
           src={thumbnails.medium.url}
           alt={title}
-          className='w-full lg:w-40 lg:h-24 object-cover rounded-lg'
+          className='w-full xl:w-40 xl:h-24 object-cover rounded-lg'
         />
         <div className='flex flex-1 justify-between gap-2 min-w-0'>
           <div className='space-y-1 flex-1 min-w-0'>
@@ -147,10 +147,10 @@ const RelevantVideos = ({
   return (
     <div className={cn(className)}>
       {isLoading && relevantVideos.length === 0 ? (
-        <div className='w-full lg:space-y-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:block'>
+        <div className='w-full xl:space-y-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 xl:block'>
           {Array.from({ length: 5 }).map((_, index) => (
-            <div key={index} className='flex flex-col lg:flex-row gap-4'>
-              <Skeleton className='w-full h-40 lg:w-40 lg:h-24 rounded-lg' />
+            <div key={index} className='flex flex-col xl:flex-row gap-4'>
+              <Skeleton className='w-full h-40 xl:w-40 xl:h-24 rounded-lg' />
 
               <div className='flex-1 space-y-1'>
                 <Skeleton className='h-4 w-full' />
@@ -162,7 +162,7 @@ const RelevantVideos = ({
         </div>
       ) : relevantVideos.length > 0 ? (
         <>
-          <div className='w-full lg:space-y-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:block'>
+          <div className='w-full xl:space-y-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 xl:block'>
             {renderedRelevantVideos}
           </div>
           {isLoading && <LoadingSpinner className='h-30' />}
@@ -171,12 +171,12 @@ const RelevantVideos = ({
         <p className='text-white'>No relevant videos found</p>
       )}
 
-      <div ref={observerRef} className='h-4 hidden lg:block' />
+      <div ref={observerRef} className='h-4 hidden xl:block' />
 
       {nextPageToken && !isLoading && relevantVideos.length > 0 && (
         <button
           onClick={fetchRelevantVideos}
-          className='text-sm font-medium text-blue-400 cursor-pointer rounded-full border border-neutral-500/50 w-full py-2 mt-4 hover:bg-blue-500/40 transition-colors duration-200 inline-block lg:hidden'
+          className='text-sm font-medium text-blue-400 cursor-pointer rounded-full border border-neutral-500/50 w-full py-2 mt-4 hover:bg-blue-500/40 transition-colors duration-200 inline-block xl:hidden'
         >
           Show more
         </button>

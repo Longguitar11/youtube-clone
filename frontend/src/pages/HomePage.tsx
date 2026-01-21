@@ -120,7 +120,7 @@ const HomePage = () => {
 
         <div className='flex gap-2'>
           <img
-            src={channelAvatars[channelId] || './user.png'}
+            src={channelAvatars[channelId] || '/user.png'}
             alt={title}
             loading='lazy'
             className='w-9 h-9 rounded-full shrink-0'

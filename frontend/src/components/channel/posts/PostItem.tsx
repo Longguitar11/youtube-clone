@@ -88,7 +88,7 @@ const PostItem = ({ post, setPosts, className }: PostItemProps) => {
       )}
     >
       <div className='flex gap-4 '>
-        <img src={profileUrl || './user.png'} alt={name} className='size-10 rounded-full' />
+        <img src={profileUrl || '/user.png'} alt={name} className='size-10 rounded-full' />
 
         <div className='space-y-2 w-full'>
           <div className='flex gap-2 items-center text-gray-50'>

@@ -60,7 +60,7 @@ const MyChannel = () => {
 
       <div className='flex gap-4 items-center'>
         <img
-          src={profileUrl || './user.png'}
+          src={profileUrl || '/user.png'}
           alt={name}
           className='w-20 h-20 sm:w-36 sm:h-36 md:w-44 md:h-44 shrink-0 rounded-full'
         />

@@ -95,7 +95,7 @@ const WatchPage = () => {
     <div>
       {videoId && (
         <div>
-          <VideoPlayer videoId={videoId || ''} />
+          <VideoPlayer videoId={videoId} />
 
           <div className='flex gap-4 px-4 lg:px-8 py-4 bg-black text-white overflow-hidden'>
             <div className='flex-1 space-y-4'>
@@ -108,9 +108,9 @@ const WatchPage = () => {
                     onClick={() => navigate(`/channel/${channelId}`)}
                   >
                     <img
-                      src={channel?.snippet.thumbnails.high.url || './user.png'}
+                      src={channel?.snippet.thumbnails.high.url || '/user.png'}
                       alt={channelTitle}
-                      className='w-10 h-10 rounded-full'
+                      className='size-10 rounded-full'
                     />
                     <div>
                       <p className='font-medium truncate w-20 md:w-full'>
@@ -167,10 +167,11 @@ const WatchPage = () => {
                   </div>
 
                   <div className='flex gap-2 items-center'>
-                    <ShareButton contentId={videoId} />
+                    <ShareButton textBtnClass='max-[500px]:hidden' contentId={videoId} />
 
                     <IconButton
                       text='Download'
+                      textClassName='max-[500px]:hidden'
                       className='flex sm:hidden lg:flex'
                     >
                       <LiaDownloadSolid className='text-2xl' />
@@ -192,13 +193,13 @@ const WatchPage = () => {
               />
 
               <RelevantVideos
-                className='block lg:hidden w-full'
+                className='block xl:hidden w-full'
                 videoId={videoId}
                 channelId={channelId}
               />
 
               <VideoComment
-                className='w-full lg:flex-1'
+                className='w-full'
                 videoId={videoId}
                 channelId={channelId}
                 commentCount={commentCount}
@@ -206,7 +207,7 @@ const WatchPage = () => {
             </div>
 
             <RelevantVideos
-              className='hidden lg:block lg:w-1/3'
+              className='hidden xl:block xl:w-1/3'
               videoId={videoId}
               channelId={channelId}
             />

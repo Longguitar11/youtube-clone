@@ -33,6 +33,7 @@ interface ShareButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   contentId: string
   type?: 'video' | 'channel'
   text?: string
+  textBtnClass?: string
   stopPropagation?: boolean
   isHiddenTrigger?: boolean
   open?: boolean
@@ -45,6 +46,7 @@ const ShareButton = ({
   contentId,
   type = 'video',
   text,
+  textBtnClass,
   isHiddenTrigger = false,
   open,
   onOpenChange,
@@ -78,6 +80,7 @@ const ShareButton = ({
           <IconButton
             {...rest}
             text={text || 'Share'}
+            textClassName={textBtnClass}
             className={buttonClassName}
           >
             <PiShareFatLight className='text-2xl' />

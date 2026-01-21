@@ -24,9 +24,10 @@ const CommentInput = ({
       className={cn('flex items-center gap-4', className)}
     >
       <img
-        src='./user.png'
+        src='/user.png'
         alt='my avatar'
-        className={cn('w-10 h-10 rounded-full', type === 'edit' && 'hidden')}
+        loading='lazy'
+        className={cn('size-10 rounded-full', type === 'edit' && 'hidden')}
       />
       <Input
         placeholder='Add a comment...'
