@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 
@@ -14,10 +14,31 @@ interface CommentInputProps {
 const CommentInput = ({
   onSubmit,
   setText,
-  text,
+  text = '',
   className,
   type = 'comment'
 }: CommentInputProps) => {
+  const [commentText, setCommentText] = useState(text)
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+    }
+
+    timerRef.current = setTimeout(() => {
+      if (text !== commentText) {
+        setText(commentText)
+      }
+    }, 800)
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
+      }
+    }
+  }, [commentText])
+
   return (
     <form
       onSubmit={onSubmit}
@@ -31,8 +52,8 @@ const CommentInput = ({
       />
       <Input
         placeholder='Add a comment...'
-        value={text}
-        onChange={e => setText(e.target.value)}
+        value={commentText}
+        onChange={e => setCommentText(e.target.value)}
         className='flex-1'
         autoFocus={type === 'reply'}
       />
@@ -49,9 +70,13 @@ const CommentInput = ({
         )} */}
 
         {type === 'edit' ? (
-          <Button type='submit'>Save</Button>
+          <Button type='submit' disabled={text === commentText}>
+            Save
+          </Button>
         ) : (
-          <Button type='submit'>Comment</Button>
+          <Button type='submit' disabled={!commentText}>
+            Comment
+          </Button>
         )}
       </div>
     </form>

@@ -27,7 +27,7 @@ interface CommentItemProps {
 
 const CommentItem = ({
   comment,
-  className = '',
+  className,
   type = 'normal',
   setCommentThreads
 }: CommentItemProps) => {
@@ -99,8 +99,6 @@ const CommentItem = ({
 
   const handleEditComment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    console.log(editText, videoId)
 
     if (!editText || !videoId || editText === textOriginal) return
 
@@ -222,11 +220,13 @@ const CommentItem = ({
             <HiOutlineDotsVertical className={cn('text-lg cursor-pointer', isEdit && 'hidden')} />
           </DropdownMenuTrigger>
           <DropdownMenuContent className='bg-green-950 text-white'>
-            <DropdownMenuItem
+            {
+              
+              <DropdownMenuItem
               onClick={() => setIsEdit(true)}
             >
               Edit
-            </DropdownMenuItem>
+            </DropdownMenuItem>}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
