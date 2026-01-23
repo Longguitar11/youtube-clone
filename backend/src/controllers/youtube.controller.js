@@ -299,8 +299,6 @@ export const getVideoComments = async (req, res) => {
             // get my comments
             const myComment = await user.docs[0].ref.collection('myCommentVideos').doc(videoId).collection('myComments').get();
 
-            console.log(myComment.docs.map(doc => doc.id));
-
             if (myComment.empty) {
                 return res.json(data.items);
             }

@@ -38,7 +38,7 @@ const VideoComment = ({
   const { user } = useAppContext()
 
   const [commentThreads, setCommentThreads] = useState<
-    CommentThreadInterface[]
+  CommentThreadInterface[]
   >([])
 
   const [text, setText] = useState('')

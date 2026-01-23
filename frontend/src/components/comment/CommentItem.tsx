@@ -41,7 +41,7 @@ const CommentItem = ({
       textOriginal,
       likeCount,
       parentId,
-      publishedAt,
+      publishedAt
     }
   } = comment
 
@@ -50,7 +50,7 @@ const CommentItem = ({
   const [isEdit, setIsEdit] = useState(false)
   const [editText, setEditText] = useState(textOriginal)
 
-  const { dislikedCommentIds, likedCommentIds, ratingAComment } =
+  const { dislikedCommentIds, likedCommentIds, ratingAComment, user } =
     useAppContext()
 
   const handleReply = async (e: FormEvent<HTMLFormElement>) => {
@@ -103,7 +103,10 @@ const CommentItem = ({
     if (!editText || !videoId || editText === textOriginal) return
 
     const { message, error } = await editComment({
-      commentId: id, text, videoId, parentId
+      commentId: id,
+      text,
+      videoId,
+      parentId
     })
 
     if (error) {
@@ -141,7 +144,7 @@ const CommentItem = ({
         className={cn('rounded-full', type === 'normal' ? 'size-10' : 'size-6')}
       />
 
-      <div className='flex flex-1 justify-between items-center'>
+      <div className='flex flex-1 justify-between items-start gap-4'>
         <div className='space-y-1 w-full'>
           <div className='flex items-center gap-1'>
             <p className='font-medium text-sm'>{authorDisplayName}</p>
@@ -217,16 +220,21 @@ const CommentItem = ({
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <HiOutlineDotsVertical className={cn('text-lg cursor-pointer', isEdit && 'hidden')} />
+            <div className='p-2 rounded-full hover:bg-neutral-700 transition-colors duration-200'>
+
+            <HiOutlineDotsVertical
+              className={cn('text-lg cursor-pointer', isEdit && 'hidden')}
+              />
+              </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className='bg-green-950 text-white'>
-            {
-              
-              <DropdownMenuItem
-              onClick={() => setIsEdit(true)}
-            >
-              Edit
-            </DropdownMenuItem>}
+            {user?.channel.channelId === authorChannelId ? (
+              <DropdownMenuItem onClick={() => setIsEdit(true)}>
+                Edit
+              </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem>Report</DropdownMenuItem>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

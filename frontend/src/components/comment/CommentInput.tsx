@@ -39,6 +39,11 @@ const CommentInput = ({
     }
   }, [commentText])
 
+  // Update commentText when text changes externally
+  useEffect(() => {
+    setCommentText(text)
+  }, [text])
+
   return (
     <form
       onSubmit={onSubmit}
@@ -70,7 +75,7 @@ const CommentInput = ({
         )} */}
 
         {type === 'edit' ? (
-          <Button type='submit' disabled={text === commentText}>
+          <Button type='submit'>
             Save
           </Button>
         ) : (
